@@ -1,0 +1,11 @@
+# You could lint your package like this:
+# dartanalyzer --options analysis_options.yaml .
+# flutter analyze
+
+# https://github.com/dart-lang/linter
+linter:
+  rules:
+    - annotate_overrides
+    - hash_and_equals
+    - prefer_double_quotes
+    - prefer_is_not_empty
