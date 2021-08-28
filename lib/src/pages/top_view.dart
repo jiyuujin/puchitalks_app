@@ -28,7 +28,7 @@ class TopState extends State<TopViewPage> {
               Column(
                 children: [
                   ListTile(
-                    title: Text(ClientRole.Broadcaster.toString()),
+                    title: Text('Speaker'),
                     leading: Radio(
                       value: ClientRole.Broadcaster,
                       groupValue: _role,
@@ -40,7 +40,7 @@ class TopState extends State<TopViewPage> {
                     ),
                   ),
                   ListTile(
-                    title: Text(ClientRole.Audience.toString()),
+                    title: Text('Audience'),
                     leading: Radio(
                       value: ClientRole.Audience,
                       groupValue: _role,
