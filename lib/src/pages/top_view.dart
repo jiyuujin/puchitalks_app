@@ -10,15 +10,8 @@ class TopViewPage extends StatefulWidget {
 }
 
 class TopState extends State<TopViewPage> {
-  final _channelController = TextEditingController();
-  bool _validateError = false;
+  final _channelName = 'Test';
   ClientRole? _role = ClientRole.Broadcaster;
-
-  @override
-  void dispose() {
-    _channelController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,23 +25,6 @@ class TopState extends State<TopViewPage> {
           height: 400,
           child: Column(
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      controller: _channelController,
-                      decoration: InputDecoration(
-                        errorText:
-                          _validateError ? 'Channel name is mandatory' : null,
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(width: 1),
-                        ),
-                        hintText: 'Channel name',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               Column(
                 children: [
                   ListTile(
@@ -106,24 +82,17 @@ class TopState extends State<TopViewPage> {
   }
 
   Future<void> onJoin() async {
-    setState(() {
-      _channelController.text.isEmpty
-        ? _validateError = true
-        : _validateError = false;
-    });
-    if (_channelController.text.isNotEmpty) {
-      await _handleCameraAndMic(Permission.camera);
-      await _handleCameraAndMic(Permission.microphone);
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => WebrtcViewPage(
-            channelName: _channelController.text,
-            role: _role,
-          ),
+    await _handleCameraAndMic(Permission.camera);
+    await _handleCameraAndMic(Permission.microphone);
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => WebrtcViewPage(
+          channelName: _channelName,
+          role: _role,
         ),
-      );
-    }
+      ),
+    );
   }
 
   Future<void> _handleCameraAndMic(Permission permission) async {
